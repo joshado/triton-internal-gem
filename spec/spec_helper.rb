@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "triton"
+require "triton/internal"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
