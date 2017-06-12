@@ -4,10 +4,11 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'triton/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "triton"
+  spec.name          = "triton-internal"
   spec.version       = Triton::VERSION
   spec.authors       = ["Thomas Haggett"]
   spec.email         = ["thomas-tritongem@haggett.org"]
+  spec.licenses      = ['MIT']
 
   spec.summary       = %q{Library to wrap the Triton internal APIs}
   spec.description   = %q{Library that wraps all of the Joyent Triton Internal APIs in a consistent ruby interface allowing easier calling and mocking.}
