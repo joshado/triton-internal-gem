@@ -4,17 +4,17 @@ Gem to wrap and mock the Triton internal APIs.
 
 Currently supports:
 
- * Vmapi
- * Cnapi
- * Napi
- * Papi
- * Imgapi
+ * [Vmapi](https://github.com/joyent/sdc-vmapi/blob/master/docs/index.md)
+ * [Cnapi](https://github.com/joyent/sdc-cnapi/blob/master/docs/index.md)
+ * [Napi](https://github.com/joyent/sdc-napi/blob/master/docs/index.md)
+ * [Papi](https://github.com/joyent/sdc-papi/blob/master/docs/index.md)
+ * [Imgapi](https://github.com/joyent/sdc-imgapi/blob/master/docs/index.md)
 
 ## Usage
 
-This library simply exposes the internal Triton API layer as cleaner Ruby function calls with a consistent interface. Rather than re-implement and re-document all the calls, a relatively small set of conventions map the function calls to the HTTP requests allowing the the Joyent documentation to be used directly.
+This library simply exposes the internal Triton API layer as cleaner Ruby function calls with a consistent interface. Rather than re-implement and re-document all the calls, a relatively small set of conventions map the function calls to the HTTP requests allowing the fantastic Joyent documentation, linked above, to be used directly.
 
-    https://github.com/joyent/sdc-vmapi/blob/master/docs/index.md
+
 
 ### Configuration
 
