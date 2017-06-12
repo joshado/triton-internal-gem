@@ -1,5 +1,7 @@
 # Triton
 
+[![Build Status](https://travis-ci.org/joshado/triton-internal-gem.svg?branch=master)](https://travis-ci.org/joshado/triton-internal-gem)
+
 Gem to wrap and mock the Triton internal APIs.
 
 Currently supports:
