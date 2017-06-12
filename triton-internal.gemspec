@@ -14,9 +14,8 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Library that wraps all of the Joyent Triton Internal APIs in a consistent ruby interface allowing easier calling and mocking.}
   spec.homepage      = "https://github.com/joshado/triton-internal-gem"
 
-  spec.files         = Dir.glob(File.expand_path("../**/*", __FILE__)).reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files         = Dir['LICENSE', 'README.md', 'lib/**/*']
+
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
