@@ -2,13 +2,16 @@
 
 require "bundler/setup"
 require "triton"
+require 'optparse'
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
-
-# (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+OptionParser.new do |o|
+  o.on("--socks [host:]port", String, "Configures the library to use a SOCKS proxy at host:port (defaults host to localhost)") do |v|
+    Triton.socks = v
+  end
+  o.on("--suffix suffix", String, "Specifies the triton hostname suffix to use") do |v|
+    Triton.suffix = v
+  end
+end.parse!(ARGV)
 
 require "irb"
 IRB.start(__FILE__)
