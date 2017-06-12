@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Library to wrap the Triton internal APIs}
   spec.description   = %q{Library that wraps all of the Joyent Triton Internal APIs in a consistent ruby interface allowing easier calling and mocking.}
-  spec.homepage      = "http://thomas.haggett.org/"
+  spec.homepage      = "https://github.com/joshado/triton-internal-gem"
 
   spec.files         = Dir.glob(File.expand_path("../**/*", __FILE__)).reject do |f|
     f.match(%r{^(test|spec|features)/})
