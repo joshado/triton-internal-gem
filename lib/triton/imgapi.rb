@@ -14,7 +14,7 @@ module Triton
     call('DeleteImageIcon', :method => :delete, :path => '/images/:uuid/icon')
     call('DeleteImage', :method => :delete, :path => '/images/:uuid')
     call('CreateImage', :method => :post, :path => '/images')
-    call('CreateImageFromVm', :method => :post, :path => '/images?action=create-from-vm')
+    call('CreateImageFromVm', :method => :post, :path => '/images?action=create-from-vm', :body_param => 'manifest')
     call('ExportImage', :method => :post, :path => '/images/:uuid?action=export')
     call('AddImageFile', :method => :put, :path => '/images/:uuid/file')
     call('AddImageIcon', :method => :put, :path => '/images/:uuid/icon')
