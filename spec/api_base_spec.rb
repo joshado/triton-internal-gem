@@ -33,6 +33,19 @@ describe "ApiMapping" do
         :body_param => :metadata
       })
 
+      call("QueryStringParameterExisting", {
+        :path => '/test/path?a=1',
+        :method => :post,
+        :querystring => 'foo'
+      })
+      call("QueryStringParameterNew", {
+        :path => '/test/path2',
+        :method => :post,
+        :querystring => ['bar', :baz]
+      })
+
+      call('ArrayResponse', :path => '/array/response', :response => :json_lines)
+      call('CustomResponse', :path => '/array/response', :response => lambda { |a| Marshal.load(a) })
     end
   end
 
@@ -79,6 +92,18 @@ describe "ApiMapping" do
       expect(subject.execute['something']).to eq("here")
       expect(subject.execute[:nested][:something]).to eq("inner")
       expect(subject.execute[:nested]['something']).to eq("inner")
+    end
+
+    it "should decode the payload as an array of JSON lines if :parse => :json_lines is set" do
+      api = fakeapi.new("ArrayResponse")
+      allow(api.request).to receive(:execute).and_return(%[{"line":1}\n{"line":2}\n{"line":3}\n])
+      expect(api.execute).to be_an(Array)
+    end
+
+    it "should allow a custom parser to be provided" do
+      api = fakeapi.new("CustomResponse")
+      allow(api.request).to receive(:execute).and_return(Marshal.dump('hello' => 'world'))
+      expect(api.execute).to eq('hello' => 'world')
     end
   end
 
@@ -281,6 +306,27 @@ describe "ApiMapping" do
       expect(URI.parse(subject.request.url).query).to eq("other_param=other_value&key=value")
     end
 
+  end
+
+  describe ":querystring parameters" do
+
+    it "should not change the query string if the parameters aren't included" do
+      expect(fakeapi.new('QueryStringParameterExisting', {}).request.url).to eq('http://fakeapi.test/test/path?a=1')
+      expect(fakeapi.new('QueryStringParameterNew', {}).request.url).to eq('http://fakeapi.test/test/path2')
+    end
+
+    it "should set the query string when there is no existing query string" do
+      expect(fakeapi.new('QueryStringParameterNew', {'bar' => 'barvalue'}).request.url).to eq('http://fakeapi.test/test/path2?bar=barvalue')
+      expect(fakeapi.new('QueryStringParameterNew', {'bar' => 'barvalue','baz' => 'bazvalue'}).request.url).to eq('http://fakeapi.test/test/path2?bar=barvalue&baz=bazvalue')
+    end
+
+    it "should append the query string parameter correctly to existing parameters" do
+      expect(fakeapi.new('QueryStringParameterExisting', {'foo' => 'foovalue'}).request.url).to eq('http://fakeapi.test/test/path?a=1&foo=foovalue')
+    end
+
+    it "should write other parameters to the payload as normal" do
+      expect(fakeapi.new('QueryStringParameterExisting', {'foo' => 'foovalue', 'bar' => 'barvalue'}).request.payload.to_s).to eq(%[{"bar":"barvalue"}])
+    end
   end
 
 end

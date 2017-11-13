@@ -26,7 +26,7 @@ module Triton
     call('UpdateImage', :method => :post, :path => '/images/:uuid?action=update')
     call('AdminImportImage', :method => :post, :path => '/images/:uuid?action=import')
     call('AdminImportRemoteImage', :method => :post, :path => '/images/:uuid?action=import-remote')
-    call('AdminImportDockerImage', :method => :post, :path => '/images?action=import-docker-image')
+    call('AdminImportDockerImage', :method => :post, :path => '/images?action=import-docker-image', :querystring => ['tag', 'repo', 'digest'], :response => :json_lines)
     call('AdminChangeImageStor', :method => :post, :path => '/images/:uuid?action=change-stor&stor=:newstor')
     call('ListImageJobs', :method => :get, :path => '/images/:uuid/jobs')
     call('ListChannels', :method => :get, :path => '/channels')
